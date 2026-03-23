@@ -280,8 +280,7 @@ Usage: Pass a clear, specific task description. The child will execute and retur
     pi.registerTool(rlmCostTool);
     pi.registerTool(rlmStatusTool);
     // Register a command to configure RLM settings
-    pi.registerCommand({
-        name: "rlm-config",
+    pi.registerCommand("rlm-config", {
         description: "Configure RLM guardrail settings (depth, budget, timeout, model)",
         execute: async (context, args) => {
             const state = getState(context.sessionId);

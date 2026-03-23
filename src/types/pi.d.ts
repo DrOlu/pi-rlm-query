@@ -17,8 +17,7 @@ declare module "@mariozechner/pi-coding-agent" {
 
   export interface ExtensionAPI {
     registerTool(tool: Tool): void;
-    registerCommand(command: {
-      name: string;
+    registerCommand(name: string, options: {
       description: string;
       execute: (context: ToolContext, args: string[]) => Promise<any>;
     }): void;
