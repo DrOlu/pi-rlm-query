@@ -1,0 +1,40 @@
+{
+  "name": "pi-rlm-query",
+  "version": "1.0.0",
+  "description": "Recursive LLM Query extension for pi - enables agent-to-agent delegation with guardrails",
+  "keywords": ["pi-package", "rlm", "recursive", "multi-agent", "delegation", "pi", "coding-agent"],
+  "license": "MIT",
+  "author": "Dr. Olu (Seyi Akin)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DrOlu/pi-rlm-query.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DrOlu/pi-rlm-query/issues"
+  },
+  "homepage": "https://github.com/DrOlu/pi-rlm-query#readme",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "README.md",
+    "LICENSE",
+    "AGENTS.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "pi": {
+    "extensions": ["."]
+  }
+}
