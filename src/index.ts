@@ -295,43 +295,51 @@ Usage: Pass a clear, specific task description. The child will execute and retur
   // Register a command to configure RLM settings
   pi.registerCommand("rlm-config", {
     description: "Configure RLM guardrail settings (depth, budget, timeout, model)",
-    execute: async (context: ToolContext, args: string[]) => {
-      const state = getState(context.sessionId);
-      
-      if (args.length < 2) {
-        return `Current RLM Configuration:
+    handler: async (args: string, ctx: any) => {
+      const state = getState("default");
+
+      const parts = args.trim().split(/\s+/);
+
+      if (parts.length < 2) {
+        ctx.ui.notify(`Current RLM Configuration:
   Max Depth: ${state.maxDepth}
   Budget: $${state.budget}
   Max Calls: ${state.maxCalls}
   Timeout: ${state.timeout}s
   Model: ${process.env.RLM_MODEL || DEFAULT_CONFIG.MODEL}
-  
+
 Usage: /rlm-config <setting> <value>
-Settings: depth, budget, calls, timeout, model`;
+Settings: depth, budget, calls, timeout, model`, "info");
+        return;
       }
-      
-      const [setting, value] = args;
-      
+
+      const [setting, value] = parts;
+
       switch (setting) {
         case "depth":
           state.maxDepth = parseInt(value);
-          return `Max depth set to ${state.maxDepth}`;
+          ctx.ui.notify(`Max depth set to ${state.maxDepth}`, "success");
+          break;
         case "budget":
           state.budget = parseFloat(value);
-          return `Budget set to $${state.budget}`;
+          ctx.ui.notify(`Budget set to $${state.budget}`, "success");
+          break;
         case "calls":
           state.maxCalls = parseInt(value);
-          return `Max calls set to ${state.maxCalls}`;
+          ctx.ui.notify(`Max calls set to ${state.maxCalls}`, "success");
+          break;
         case "timeout":
           state.timeout = parseInt(value);
-          return `Timeout set to ${state.timeout}s`;
+          ctx.ui.notify(`Timeout set to ${state.timeout}s`, "success");
+          break;
         case "model":
           process.env.RLM_MODEL = value;
-          return `Child model set to ${value}`;
+          ctx.ui.notify(`Model set to ${value}`, "success");
+          break;
         default:
-          return `Unknown setting: ${setting}. Use: depth, budget, calls, timeout, model`;
+          ctx.ui.notify(`Unknown setting: ${setting}. Use: depth, budget, calls, timeout, model`, "error");
       }
-    }
+    },
   });
 
   console.log("[pi-rlm-query] Extension loaded - rlm_query, rlm_cost, rlm_status tools registered");

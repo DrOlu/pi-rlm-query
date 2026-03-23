@@ -1,6 +1,6 @@
 {
   "name": "pi-rlm-query",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Recursive LLM Query extension for pi - enables agent-to-agent delegation with guardrails",
   "keywords": ["pi-package", "rlm", "recursive", "multi-agent", "delegation", "pi", "coding-agent"],
   "license": "MIT",
